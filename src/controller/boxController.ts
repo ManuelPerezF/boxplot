@@ -9,9 +9,13 @@ export class BoxController {
         this.dbService = dbService;
     }
 
-    async getBox(min: number, max: number, median: number,  q1: number, q3: number) : Promise<Box[]> {
-        const box = await this.dbService.getBox(min, max, median, q1, q3);
-        return box;
+    async getBox(): Promise<Box> {
+        const data = await this.dbService.getData();
+        return this.calculateBox(data);
+    }
+
+    calculateBox(data: number[]): Box {
+        const sortedData = data.sort((a, b) => a - b);
     }
 
 }
